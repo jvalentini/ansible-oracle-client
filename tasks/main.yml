@@ -39,14 +39,17 @@
   changed_when: false
   tags: install
 
+- name: creating a libclntsh.so symlink for ruby oci and python
+  shell: cd {{ ls_oracle_home.stdout }}; ln -sf libclntsh.so.11.1 libclntsh.so
+  tags: install
+
+- name: creating a libocci.so symlink for ruby oci and python
+  shell: cd {{ ls_oracle_home.stdout }}; ln -sf libocci.so.11.1 libocci.so
+  tags: install
+
 - name: installing cx_Oracle
   pip: name=cx_Oracle state=latest
   when: oracle_client_install_cx_oracle
   environment:
     ORACLE_HOME: "{{ ls_oracle_home.stdout }}"
-  tags: install
-
-- name: creating a symbolink link for cx_Oracle
-  shell: cd {{ ls_oracle_home.stdout }}; ln -s libclntsh.so.11.1 libclntsh.so
-  when: oracle_client_install_cx_oracle
   tags: install
