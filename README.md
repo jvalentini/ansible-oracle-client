@@ -1,9 +1,12 @@
 Oracle Instant Client Deployment Role
 =====================================
 
-The [dareko.oracle_client](https://galaxy.ansibleworks.com/list#/roles/469) role deploys
-the Oracle Instant Client and cx_Oracle python package on a target host.  
+The [jvalentini.oracle-client](https://galaxy.ansible.com/detail#/role/6074) role deploys
+the Oracle Instant Client and cx_Oracle python package on a target host.
 It requires the Oracle Instant Client installation files downloaded from the Oracle site.
+
+This is a fork of [dareko.oracle_client](https://galaxy.ansibleworks.com/list#/roles/469).
+It changes the original role so we always add the libclntsh.so symlink. It also adds an additional symlink for libocci.so.
 
 Requirements
 ------------
@@ -28,7 +31,7 @@ The variables that can be passed to this role with default values are as follows
 
     # installation base directory
     oracle_client_base: /opt/oracle
-    
+
     # location of the instant client zip files on the local machine
     oracle_client_local_oracle_zip_files_dir: /tmp/ansible/files
 
@@ -50,7 +53,7 @@ Example Playbook
         - hosts: oracle_client
           sudo: true
           roles:
-          - { role: dareko.oracle_client, oracle_client_base: /usr/local }
+          - { role: jvalentini.oracle-client, oracle_client_base: /usr/local }
 
 3. Run the `site.yml` playbook
 
@@ -64,4 +67,4 @@ BSD
 Author Information
 ------------------
 
-[Darek Owczarek](https://galaxy.ansibleworks.com/list#/users/1102)
+[Justin Valentini](https://galaxy.ansible.com/detail#/user/17288)
